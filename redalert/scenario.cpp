@@ -66,6 +66,8 @@
 #include "carry.h"
 #include "common/framelimit.h"
 
+#include <emscripten.h>
+
 extern int PreserveVQAScreen;
 
 void Display_Briefing_Text_GlyphX();
@@ -901,6 +903,7 @@ void Do_Win(void)
                          TPF_CENTER | TPF_VCR | TPF_USE_GRAD_PAL | TPF_DROPSHADOW);
         CountDownTimer = TIMER_SECOND * 3;
         while (Is_Speaking()) {
+            emscripten_sleep(1);
         };
         Speak(VOX_ACCOMPLISHED);
         while (CountDownTimer || Is_Speaking()) {
@@ -1169,6 +1172,7 @@ void Do_Lose(void)
                      TPF_CENTER | TPF_VCR | TPF_USE_GRAD_PAL | TPF_DROPSHADOW);
     CountDownTimer = TIMER_SECOND * 3;
     while (Is_Speaking()) {
+        emscripten_sleep(1);
     };
     Speak(VOX_FAIL);
     while (CountDownTimer || Is_Speaking()) {
@@ -1265,6 +1269,7 @@ void Do_Draw(void)
                      TPF_CENTER | TPF_VCR | TPF_USE_GRAD_PAL | TPF_DROPSHADOW);
     CountDownTimer = TIMER_SECOND * 3;
     while (Is_Speaking()) {
+        emscripten_sleep(1);
     };
     Speak(VOX_CONTROL_EXIT);
     while (CountDownTimer || Is_Speaking()) {

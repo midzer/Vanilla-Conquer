@@ -63,6 +63,8 @@
 #endif
 #include "settings.h"
 
+#include <emscripten.h>
+
 #define ARRAY_SIZE(x) int(sizeof(x) / sizeof(x[0]))
 
 /*
@@ -107,6 +109,7 @@ WWKeyboardClass::WWKeyboardClass(void)
 unsigned short WWKeyboardClass::Buff_Get(void)
 {
     while (!Check()) {
+        emscripten_sleep(1);
     } // wait for key in buffer
 
     unsigned short temp = Fetch_Element();
@@ -173,6 +176,7 @@ KeyNumType WWKeyboardClass::Check(void) const
 KeyNumType WWKeyboardClass::Get(void)
 {
     while (!Check()) {
+        emscripten_sleep(1);
     } // wait for key in buffer
     return (KeyNumType)(Buff_Get());
 }

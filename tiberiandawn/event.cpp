@@ -45,6 +45,8 @@
 
 #include "function.h"
 
+#include <emscripten.h>
+
 /***************************************************************************
 ** Table of what data is really used in the EventClass struct for different
 ** events.  This table must be kept current with the EventType enum.
@@ -661,6 +663,7 @@ void EventClass::Execute(void)
         Stop_Speaking();
         Speak(VOX_CONTROL_EXIT);
         while (Is_Speaking()) {
+            emscripten_sleep(1);
             Call_Back();
         }
         GameActive = false;

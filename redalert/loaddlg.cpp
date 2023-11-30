@@ -49,6 +49,8 @@
 #include "common/framelimit.h"
 #include "common/paths.h"
 
+#include <emscripten.h>
+
 /***********************************************************************************************
  * LoadOptionsClass::LoadOptionsClass -- class constructor                                     *
  *                                                                                             *
@@ -434,6 +436,7 @@ int LoadOptionsClass::Process(void)
                     }
                     Speak(VOX_LOAD1);
                     while (Is_Speaking()) {
+                        emscripten_sleep(1);
                         Call_Back();
                     }
                     Hide_Mouse();
@@ -473,6 +476,7 @@ int LoadOptionsClass::Process(void)
             } else {
                 Speak(VOX_SAVE1);
                 while (Is_Speaking()) {
+                    emscripten_sleep(1);
                     Call_Back();
                 }
                 CDTimerClass<SystemTimerClass> timer;
